@@ -1,0 +1,17 @@
+<%- include('./_partial/user/header.ejs') %> 
+    <div class="container">
+        <center>
+            <%= data.length===0 ? "No Order History" : '' %> 
+        </center>
+        <table class="table">
+            <% data.forEach(e => { %>
+                <tr>
+                    <td><img src="/uploads/<%= e.Products[0].img %>" alt="<%= e.Products[0].img %>" width="100px"></td>
+                    <td style="vertical-align: middle;"><%= e.Products[0].name  %></td>
+                    <td style="vertical-align: middle;"><%= e.Products[0].price  %></td>
+                    <td style="vertical-align: middle;"><a href="/order/buy/<%= e.id %>/<%= e.Products[0].id  %>" class="btn btn-primary">buy</a></td>
+                </tr>
+            <% }) %> 
+        </table>
+    </div>
+<%- include('./_partial/user/footer.ejs') %> 

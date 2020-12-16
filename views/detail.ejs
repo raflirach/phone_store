@@ -1,0 +1,16 @@
+<%- include('./_partial/user/header.ejs') %> 
+    <div class="container">
+        <div class="row d-flex justify-content-around">
+            <div class="col col-md-5">
+                <img src="/uploads/<%= data.img %>" alt="<%= data.img %>" width="100%">
+            </div>
+            <div class="col col-md-5">
+                <h1><%= data.name %> </h1>
+                <h5><%= data.desc %> </h5>
+                <h5>Stock : <%= data.stock %> </h5>
+                <h5>Price : <%= data.price %> </h5>
+                <a href="/order/<%= data.id %> " class="btn btn-success"><i class="fa fa-cart-plus"> Add to cart </i></a>
+            </div>
+        </div>
+    </div>
+<%- include('./_partial/user/footer.ejs') %> 

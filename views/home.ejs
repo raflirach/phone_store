@@ -1,0 +1,19 @@
+<%- include('./_partial/user/header.ejs') %> 
+    <div class="container">
+        <div class="row d-flex justify-content-center">
+            <% data.forEach(e => { %>
+                <a href="/products/<%= e.id %> ">
+                    <div class="col-md col-sm-12">
+                        <div class="card m-2" style="width: 18rem;">
+                            <img src="/uploads/<%= e.img %> " class="card-img-top" alt="...">
+                            <div class="card-body">
+                            <h5 class="card-title"><%= e.name %> </h5>
+                            <p class="card-text"><%= e.price %> </p>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            <% }) %> 
+        </div>
+    </div>
+<%- include('./_partial/user/footer.ejs') %> 

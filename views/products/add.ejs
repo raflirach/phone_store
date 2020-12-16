@@ -1,0 +1,38 @@
+<%- include('../_partial/header.ejs') %>
+
+<div class="container">
+    <h1>Add Product</h1>
+    <form action="/products/add" method="POST" enctype="multipart/form-data">
+        <div class="form-group">
+          <label>Name</label>
+          <input type="text" class="form-control" name="name" placeholder="e.g: Xiaomi Redmi Note 7">
+        </div>
+        <div class="form-group">
+            <label>Price</label>
+            <input type="number" class="form-control" name="price" placeholder="e.g: 349999">
+        </div>
+        <div class="form-group">
+            <label>Stock</label>
+            <input type="number" class="form-control" name="stock" placeholder="e.g: 3">
+        </div>
+        <div class="form-group">
+            <label>Description</label>
+            <input type="text" class="form-control" name="desc" placeholder="e.g: Battery 5000 Mhz">
+        </div>
+        
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
+            </div>
+            <div class="custom-file">
+                <input type="file" class="custom-file-input" name="img" id="customFile">
+                <label class="custom-file-label" for="customFile">Choose file</label>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Save</button>
+        <a href="/products" class="btn btn-danger">Cancel</a>
+      </form>
+</div>
+
+<%- include('../_partial/footer.ejs') %> 
