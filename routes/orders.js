@@ -5,7 +5,7 @@ const router = require('express').Router()
 router.route('/')
     .get(Controller.showList)
 
-router.route('/CustomerId')
+router.route('/:CustomerId')
     .get(Controller.showOne)
 
 

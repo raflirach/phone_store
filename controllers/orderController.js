@@ -8,7 +8,13 @@ class Controller {
     }
 
     static showOne(req,res){
-        
+        const { CustomerId } = req.params
+        Order.findAll({
+            where: { CustomerId },
+            include:[Customer,Product]
+        })
+        .then(data => res.render('orders/showOne',{data}))
+        .catch(e=>res.send(e))
     }
 }
 
