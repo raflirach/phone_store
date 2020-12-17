@@ -9,10 +9,14 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
+    getDate(){
+      return this.order_date.toJSON().slice(0,10)
+    }
     static associate(models) {
       // define association here
       Order.belongsToMany(models.Product,{through:models.OrderProduct})
       Order.hasMany(models.OrderProduct)
+      Order.belongsTo(models.Customer)
     }
   };
   Order.init({

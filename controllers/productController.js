@@ -4,22 +4,29 @@ const upload = require('../helpers/multer')
 class Controller {
     static showList(req,res){
         Product.findAll()
-        .then( data => res.render('products/index', {data}))
+        .then( data => {
+            data.map(e => {
+                e.price = Product.formatPrice(e.price)
+            })
+            res.render('products/index', {data})
+        })
         .catch(e => res.send(e))
         
     }
 
     static showFormAdd(req,res){
-        res.render('products/add')
+        let errors
+        if(Object.keys(req.query).length > 0) errors = req.query
+        res.render('products/add', {errors})
     }
 
     static add(req,res){
         let input
         upload(req,res, (err,data) => {
-            if(err) res.send(err)
+            if(err) res.redirect(`/products/add?${err}`)
             else{
                 if(!req.file){
-                    res.send('no file selected')
+                    res.redirect(`/products/add?eImg=Please upload an image`)
                 }else{
                     input = {
                         name: req.body.name ? req.body.name : null,
@@ -30,7 +37,10 @@ class Controller {
                     }
                     Product.create(input)
                         .then(_=> res.redirect('/products'))
-                        .catch(e=>res.send(e))
+                        .catch(e=>{
+                            let errors = e.errors.map(e => e.message).join('&')
+                            res.redirect(`/products/add?${errors}`)
+                        })
                 }
             }
         })  
@@ -38,15 +48,17 @@ class Controller {
 
     static showFormEdit(req,res){
         let id = req.params.id
+        let errors
+        if(Object.keys(req.query).length > 0) errors = req.query
         Product.findByPk(id)
-        .then( data => res.render('products/edit', {data}))
+        .then( data => res.render('products/edit', {data,errors}))
         .catch(e=>res.send(e))    
     }
 
     static edit(req,res){
         let input
         upload(req,res, (err,data) => {
-            if(err) res.send(err)
+            if(err) res.redirect(`/products/edit/${req.params.id}?${err}`)
             else{
                 if(!req.file){
                     input = {
@@ -57,7 +69,10 @@ class Controller {
                     }
                     Product.update(input,{where:{id:req.params.id}})
                     .then(_=> res.redirect('/products'))
-                    .catch(e=>res.send(e))
+                    .catch(e=>{
+                            let errors = e.errors.map(e => e.message).join('&')
+                            res.redirect(`/products/edit/${req.params.id}?${errors}`)
+                        })
                 }else{
                     input = {
                         name: req.body.name ? req.body.name : null,
@@ -68,7 +83,10 @@ class Controller {
                     }
                     Product.update(input,{where:{id:req.params.id}})
                     .then(_=> res.redirect('/products'))
-                    .catch(e=>res.send(e))
+                    .catch(e=>{
+                            let errors = e.errors.map(e => e.message).join('&')
+                            res.redirect(`/products/edit/${req.params.id}?${errors}`)
+                        })
                 }
             }
         })  

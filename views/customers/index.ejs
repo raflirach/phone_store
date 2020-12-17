@@ -1,0 +1,25 @@
+<%- include('../_partial/header.ejs') %>
+    <table id="example" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Username</th>
+                <th>Address</th>
+                <th>Phone Number</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% data.forEach(e => { %>
+                <tr>
+                    <td><%= e.getFullName() %> </td>
+                    <td><%= e.username %></td>
+                    <td><%= e.address %></td>
+                    <td><%= e.phone_number %> </td>
+                    <td><a href="/orders/<%= e.id %>" class="btn btn-success">Show Orders</a></td>
+                </tr>
+            <% }) %>  
+        </tbody>
+    </table>
+
+<%- include('../_partial/footer.ejs') %> 

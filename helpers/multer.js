@@ -28,7 +28,7 @@ function checkFileType(file, cb){
     if(mimetype && extname){
         return cb(null, true)
     }else{
-        cb('Error : Image Only')
+        cb('eImg=Image extention must be jpg or png')
     }
 }
 

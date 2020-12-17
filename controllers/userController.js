@@ -11,7 +11,10 @@ class Controller {
                 }
             }
         })
-        .then( data => res.render('home', {data}))
+        .then( data => {
+            data.map(e => e.price = Product.formatPrice(e.price))
+            res.render('home', {data})
+        })
         .catch(e => res.send(e))
     }
 
