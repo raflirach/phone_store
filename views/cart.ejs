@@ -1,6 +1,9 @@
 <%- include('./_partial/user/header.ejs') %> 
     <div class="container">
         <center>
+            <% if(errors) { %>
+                <script>alert('Stok barang tidak tersedia')</script>
+            <% } %> 
             <%= data.length===0 ? "No Order History" : '' %> 
         </center>
         <table class="table">

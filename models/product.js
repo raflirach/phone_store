@@ -56,9 +56,14 @@ module.exports = (sequelize, DataTypes) => {
           args: true,
           msg: `eStock=Field stock can't be empty`
         },
-        min: {
-          args : 1,
-          msg: `eStock=Stock must be more then 0`
+        // min: {
+        //   args : -1,
+        //   msg: `eStock=Stock must be more then 0`
+        // },
+        isNegative(value) {
+          if (value < 0) {
+            throw new Error('eStock=Stock must be more then equal 0');
+          }
         }
       }
     },

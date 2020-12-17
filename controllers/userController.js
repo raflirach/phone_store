@@ -38,7 +38,8 @@ class Controller {
     }
 
     static showCartList(req,res){
-        console.log('masuk');
+        let errors
+        if(Object.keys(req.query).length > 0) errors = req.query
         Order.findAll({
             where:{
                 [Op.and] : [{CustomerId:req.session.account.CustomerId},{status: 'Belum Bayar'}]
@@ -49,7 +50,7 @@ class Controller {
             data.map(e => {
                 e.Products[0].price = Product.formatPrice(e.Products[0].price)
             })
-            res.render("cart", {data})
+            res.render("cart", {data, errors})
         })
         .catch(e => res.send(e))
     }
@@ -64,7 +65,7 @@ class Controller {
             return Product.update({stock:data.stock-1},{where:{id:ProductId}})
         })
         .then( _=> res.redirect('/order/cart'))
-        .catch(e=>res.send(e))
+        .catch(e=>res.redirect('/order/cart?err=stock habis'))
     }
 }
 
