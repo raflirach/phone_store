@@ -12,7 +12,8 @@
                     <td><img src="/uploads/<%= e.Products[0].img %>" alt="<%= e.Products[0].img %>" width="100px"></td>
                     <td style="vertical-align: middle;"><%= e.Products[0].name  %></td>
                     <td style="vertical-align: middle;"><%= e.Products[0].price  %></td>
-                    <td style="vertical-align: middle;"><a href="/order/buy/<%= e.id %>/<%= e.Products[0].id  %>" class="btn btn-primary">buy</a></td>
+                    <td style="vertical-align: middle;"><a href="/order/buy/<%= e.id %>/<%= e.Products[0].id  %>" class="btn btn-primary"><i class="fa fa-shopping-cart"></i>buy</a></td>
+                    <td style="vertical-align: middle;"><a href="/order/delete/<%= e.id %>" class="text-danger"><i class="fa fa-trash"></i></a></td>
                 </tr>
             <% }) %> 
         </table>

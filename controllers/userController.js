@@ -67,6 +67,13 @@ class Controller {
         .then( _=> res.redirect('/order/cart'))
         .catch(e=>res.redirect('/order/cart?err=stock habis'))
     }
+
+    static delete(req,res){
+        const { id } = req.params
+        Order.destroy({where:{id}})
+        .then( _=> res.redirect('/order/cart'))
+        .catch(e => res.send(e))
+    }
 }
 
 module.exports = Controller
