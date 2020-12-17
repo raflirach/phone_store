@@ -46,6 +46,9 @@ class Controller {
             include: Product
         })
         .then(data=> {
+            data.map(e => {
+                e.Products[0].price = Product.formatPrice(e.Products[0].price)
+            })
             res.render("cart", {data})
         })
         .catch(e => res.send(e))

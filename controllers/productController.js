@@ -95,7 +95,10 @@ class Controller {
     static showOne(req,res){
         let id = req.params.id
         Product.findByPk(id)
-        .then( data => res.render('detail', {data}))
+        .then( data => {
+            data.price = Product.formatPrice(data.price)
+            res.render('detail', {data})
+        })
         .catch(e=>res.send(e))
     }
 
