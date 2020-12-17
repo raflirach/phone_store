@@ -21,12 +21,82 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   Customer.init({
-    first_name: DataTypes.STRING,
-    last_name: DataTypes.STRING,
-    username: DataTypes.STRING,
-    password: DataTypes.STRING,
-    phone_number: DataTypes.STRING,
-    address: DataTypes.STRING
+    first_name: {
+      type:DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notNull: {
+          args: true,
+          msg: `efn=First Name can't be empty`
+        },
+        len: {
+          args: [4,25],
+          msg : `efn=first name harus 4-25 karakter`
+        }
+      }
+    },
+    last_name: {
+      type:DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notNull: {
+          args: true,
+          msg: `eln=Last Name can't be empty`
+        },
+        len: {
+          args: [4,25],
+          msg : `eln=last name harus 4-25 karakter`
+        }
+      }
+    },
+    username: {
+      type:DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notNull: {
+          args: true,
+          msg: `eun=Username can't be empty`
+        },
+        len: {
+          args: [4,25],
+          msg : `eun=Username harus 4-25 karakter`
+        }
+      }
+    },
+    password: {
+      type:DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notNull: {
+          args: true,
+          msg: `epass=Password can't be empty`
+        },
+        len: {
+          args: [4,25],
+          msg : `epass=Password harus 4-25 karakter`
+        }
+      }
+    },
+    phone_number: {
+      type:DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notNull: {
+          args: true,
+          msg: `epn=Phone number can't be empty`
+        },
+      }
+    },
+    address: {
+      type:DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notNull: {
+          args: true,
+          msg: `eadd=address can't be empty`
+        },
+      }
+    }
   }, {
     hooks: {
       beforeCreate: (instance,options) => {

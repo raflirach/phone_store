@@ -3,8 +3,10 @@ const { Account } = require('../models');
 
 class Controller {
     static showFormLogin(req,res){
+        let errors
+        if(Object.keys(req.query).length > 0) errors = req.query
         if(req.session.account) res.redirect('/')
-        else res.render('login')
+        else res.render('login', {errors})
     }
 
     static login(req,res){

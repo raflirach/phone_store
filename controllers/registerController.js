@@ -2,7 +2,9 @@ const { Account, Customer } = require('../models');
 
 class Controller {
     static showFormRegister(req,res){
-        res.render('register')
+        let errors
+        if(Object.keys(req.query).length > 0) errors = req.query
+        res.render('register',{errors})
     }
 
     static register(req,res){
@@ -25,7 +27,10 @@ class Controller {
             })
         })
         .then( _=> res.redirect('/login'))
-        .catch(e=>res.send(e))
+        .catch(e=>{
+            let errors = e.errors.map(e => e.message).join('&')
+            res.redirect(`/register?${errors}`)
+        })
     }
 }
 
