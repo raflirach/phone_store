@@ -5,7 +5,9 @@
                 <a href="/products/<%= e.id %> ">
                     <div class="col-md col-sm-12">
                         <div class="card m-2" style="width: 18rem;">
-                            <img src="/uploads/<%= e.img %> " class="card-img-top" alt="...">
+                            <div style="height: 300px;overflow: hidden;">
+                                <img src="/uploads/<%= e.img %> " class="card-img-top" alt="...">
+                            </div>
                             <div class="card-body">
                             <h5 class="card-title"><%= e.name %> </h5>
                             <p class="card-text"><%= e.price %> </p>
